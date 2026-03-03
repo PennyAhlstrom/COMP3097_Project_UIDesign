@@ -19,19 +19,19 @@ extension Reminder {
     static let sampleReminders: [Reminder] = [
         .init(
             message: "Complete Quiz 1",
-            scheduledAt: "2026-03-06",
+            scheduledAt: "2026-03-06"
         ),
         .init(
             message: "Study for Midterm",
-            scheduledAt: "2026-02-08",
+            scheduledAt: "2026-02-08"
         ),
         .init(
             message: "Submit Lab 3",
-            scheduledAt: "2026-03-12",
+            scheduledAt: "2026-03-12"
         ),
         .init(
             message: "Midterm Exam",
-            scheduledAt: "2026-02-18",
+            scheduledAt: "2026-02-18"
         )
     ]
 }
