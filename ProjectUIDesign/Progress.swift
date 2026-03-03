@@ -1,5 +1,5 @@
 //
-//  CourseProgress.swift
+//  Progress.swift
 //  ProjectUIDesign
 //
 //  Created by Penny Ahlstrom on 2026-03-03.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CourseProgress: Identifiable, Hashable {
+struct Progress: Identifiable, Hashable {
     let id = UUID()
     //let courseId: Int // I want this to connect to an existing course
     let accumulatedPercentPoints: Double? // I want to initialize this to 0
@@ -21,8 +21,8 @@ struct CourseProgress: Identifiable, Hashable {
     //let computedAt: Date?
 }
 
-extension CourseProgress {
-    static let sampleCourseProgresses: [CourseProgress] = [
+extension Progress {
+    static let sampleProgresses: [Progress] = [
         .init(
             accumulatedPercentPoints: 12,
             usedPercentPoints: 15,
