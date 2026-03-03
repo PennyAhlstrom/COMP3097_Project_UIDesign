@@ -21,28 +21,28 @@ struct Course: Identifiable, Hashable {
 extension Course {
     static let sampleCourses: [Course] = [
         .init(
-            code: "COMP3097"
+            code: "COMP3097",
             title: "Mobile Dev II",
             instructor: "Professor Kiani",
             gradeGoal: 85,
             startWeek: Date()
         ),
         .init(
-            code: "COMP3132"
+            code: "COMP3132",
             title: "Machine Learning",
             instructor: "Professor Ajellu",
             gradeGoal: 85,
             startWeek: Date()
         ),
         .init(
-            code: "COMP3134"
+            code: "COMP3134",
             title: "Cyber Security",
             instructor: "Professor Blanc",
             gradeGoal: 85,
             startWeek: Date()
         ),
         .init(
-            code: "COMP3133"
+            code: "COMP3133",
             title: "Fullstack Dev II",
             instructor: "Professor Patel",
             gradeGoal: 85,
