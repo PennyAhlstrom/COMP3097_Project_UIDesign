@@ -16,7 +16,7 @@ struct CourseProgress: Identifiable, Hashable {
     let maxPossiblePercent: Double? // I want to initialize this to 100
     let currentGradePercent: Double? // I want to initialize this to 0
     let canMeetGoal: Bool? // I want to initialize this to T
-    let weekOf: String
+    let weekOf: String // String placeholder for now until I figure out how to set the date automatically
     //let weekOf: Date?
     //let computedAt: Date?
 }
