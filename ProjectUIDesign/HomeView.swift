@@ -19,19 +19,19 @@ struct HomeView: View {
                     }
 
                     NavigationLink {
-                        TaskListPlaceholderView()
+                        TaskListView(tasks: Task.sampleTasks)
                     } label: {
                         Label("Tasks", systemImage: "checklist")
                     }
 
                     NavigationLink {
-                        ReminderListPlaceholderView()
+                        ReminderListView(reminders: Reminder.sampleReminders)
                     } label: {
                         Label("Reminders", systemImage: "bell")
                     }
 
                     NavigationLink {
-                        ProgressPlaceholderView()
+                        ProgressListView(progresses: Progress.sampleProgresses)
                     } label: {
                         Label("Progress", systemImage: "chart.line.uptrend.xyaxis")
                     }
