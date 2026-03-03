@@ -7,18 +7,41 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct HomeView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            List {
+                Section {
+                    NavigationLink {
+                        CourseListView(courses: Course.sampleCourses)
+                    } label: {
+                        Label("Courses", systemImage: "book.closed")
+                    }
+
+                    NavigationLink {
+                        TaskListPlaceholderView()
+                    } label: {
+                        Label("Tasks", systemImage: "checklist")
+                    }
+
+                    NavigationLink {
+                        ReminderListPlaceholderView()
+                    } label: {
+                        Label("Reminders", systemImage: "bell")
+                    }
+
+                    NavigationLink {
+                        ProgressPlaceholderView()
+                    } label: {
+                        Label("Progress", systemImage: "chart.line.uptrend.xyaxis")
+                    }
+                }
+            }
+            .navigationTitle("ClassMate")
         }
-        .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    HomeView()
 }
