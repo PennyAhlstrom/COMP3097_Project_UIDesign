@@ -34,17 +34,17 @@ struct Course: Identifiable, Hashable {
     }
 }
 
-enum SampleData {
-    static let course1ID = UUID()
-    static let course2ID = UUID()
-    static let course3ID = UUID()
-    static let course4ID = UUID()
-}
-
 extension Course {
+    enum SampleIDs {
+            static let course1 = UUID(uuidString: "11111111-1111-1111-1111-111111111111")!
+            static let course2 = UUID(uuidString: "22222222-2222-2222-2222-222222222222")!
+            static let course3 = UUID(uuidString: "33333333-3333-3333-3333-333333333333")!
+            static let course4 = UUID(uuidString: "44444444-4444-4444-4444-444444444444")!
+        }
+    
     static let sampleCourses: [Course] = [
         .init(
-            id: SampleData.course1ID,
+            id: SampleIDs.course1,
             code: "COMP3097",
             title: "Mobile Dev II",
             instructor: "Professor Kiani",
@@ -52,7 +52,7 @@ extension Course {
             startWeek: Date()
         ),
         .init(
-            id: SampleData.course2ID,
+            id: SampleIDs.course2,
             code: "COMP3132",
             title: "Machine Learning",
             instructor: "Professor Ajellu",
@@ -60,7 +60,7 @@ extension Course {
             startWeek: Date()
         ),
         .init(
-            id: SampleData.course3ID,
+            id: SampleIDs.course3,
             code: "COMP3134",
             title: "Cyber Security",
             instructor: "Professor Blanc",
@@ -68,7 +68,7 @@ extension Course {
             startWeek: Date()
         ),
         .init(
-            id: SampleData.course4ID,
+            id: SampleIDs.course4,
             code: "COMP3133",
             title: "Fullstack Dev II",
             instructor: "Professor Patel",
