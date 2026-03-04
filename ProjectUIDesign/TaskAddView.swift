@@ -11,9 +11,11 @@ struct TaskAddView: View {
     @EnvironmentObject var store: AppStore
     @Environment(\.dismiss) var dismiss
 
+    @State private var courseID = Course.sampleCourses.first!.id
     @State private var title = ""
     @State private var type = "LAB"
-    @State private var dueDate = ""
+    @State var hasDueDate = false
+    @State private var dueDate = Date.now
     @State private var isCompleted = false
     @State private var isBonus = false
     @State private var isPriority = false
@@ -26,7 +28,7 @@ struct TaskAddView: View {
                 Section("Task") {
                     TextField("Title", text: $title)
                     TextField("Type (e.g., LAB)", text: $type)
-                    TextField("Due Date (YYYY-MM-DD)", text: $dueDate)
+                    DatePicker("Due Date", selection: $dueDate, displayedComponents: .date)
                 }
 
                 Section("Flags") {
@@ -42,13 +44,17 @@ struct TaskAddView: View {
             }
             .navigationTitle("Add Task")
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") { dismiss() }
+                }
+
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Add") {
                         let newTask = Task(
+                            courseID: courseID,
                             title: title,
                             type: type,
-                            dueDate: dueDate,
+                            dueDate: hasDueDate ? dueDate : nil, // dueDate is optional
                             isCompleted: isCompleted,
                             isBonus: isBonus,
                             isPriority: isPriority,
@@ -58,7 +64,7 @@ struct TaskAddView: View {
                         store.tasks.append(newTask)
                         dismiss()
                     }
-                    .disabled(title.isEmpty || dueDate.isEmpty)
+                    .disabled(title.isEmpty)
                 }
             }
         }

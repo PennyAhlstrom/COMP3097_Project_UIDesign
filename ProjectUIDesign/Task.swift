@@ -31,7 +31,7 @@ struct Task: Identifiable, Hashable {
         courseID: UUID,
         title: String,
         type: String,
-        dueDate: Date,
+        dueDate: Date?,
         isCompleted: Bool,
         isBonus: Bool,
         isPriority: Bool,
