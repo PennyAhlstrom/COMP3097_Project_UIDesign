@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct ReminderListView: View {
-    let reminders: [Reminder]
+    @EnvironmentObject var store: AppStore
+    @State private var showingAddReminder = false
+    
 
     var body: some View {
-        List(reminders) { reminder in
+        List(store.reminders) { reminder in
             NavigationLink {
-                   ReminderDetailView(reminder: reminder)
+                ReminderDetailView(reminderID: reminder.id)
             } label: {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(reminder.message)
-                        .font(.headline)
-                    
+                    Text(reminder.message).font(.headline)
                     Text("Scheduled: \(reminder.scheduledAt)")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
@@ -27,11 +27,33 @@ struct ReminderListView: View {
             }
         }
         .navigationTitle("Reminders")
+        .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            showingAddReminder = true
+                        } label: {
+                            Label("Add Reminder", systemImage: "plus")
+                        }
+                    }
+                }
+                .sheet(isPresented: $showingAddReminder) {
+                    ReminderAddView()
+                        .environmentObject(store) // pass the same store into the sheet
+                }
     }
 }
+//
+//#Preview {
+//    NavigationStack {
+//        ReminderListView(reminders: Reminder.sampleReminders)
+//    }
+//}
 
 #Preview {
     NavigationStack {
-        ReminderListView(reminders: Reminder.sampleReminders)
+        ReminderListView()
     }
+    .environmentObject(AppStore())
 }
+
+
