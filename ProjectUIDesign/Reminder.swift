@@ -5,14 +5,19 @@
 //  Created by Penny Ahlstrom on 2026-03-03.
 //
 
-
 import Foundation
 
 struct Reminder: Identifiable, Hashable {
-    let id = UUID()
+    let id: UUID
     let message: String
     let scheduledAt: String // String for now, should be LocalDateTime
     //let wasSent: Bool
+
+    init(id: UUID = UUID(), message: String, scheduledAt: String) {
+        self.id = id
+        self.message = message
+        self.scheduledAt = scheduledAt
+    }
 }
 
 extension Reminder {
