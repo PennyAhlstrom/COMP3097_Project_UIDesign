@@ -12,25 +12,29 @@ struct CourseListView: View {
 
     var body: some View {
         List(courses) { course in
-            VStack(alignment: .leading, spacing: 4) {
-                Text(course.code)
-                    .font(.headline)
-
-                Text(course.title)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-
-                Text("Instructor: \(course.instructor)")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-
-                if let goal = course.gradeGoal {
-                    Text("Grade Goal: \(goal)%")
+            NavigationLink {
+                    CourseDetailView(course: course)
+            } label: {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(course.code)
+                        .font(.headline)
+                    
+                    Text(course.title)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    
+                    Text("Instructor: \(course.instructor)")
                         .font(.caption)
                         .foregroundColor(.secondary)
+                    
+                    if let goal = course.gradeGoal {
+                        Text("Grade Goal: \(goal)%")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
                 }
+                .padding(.vertical, 6)
             }
-            .padding(.vertical, 6)
         }
         .navigationTitle("Courses")
     }
