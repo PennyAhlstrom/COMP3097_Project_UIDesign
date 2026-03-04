@@ -13,7 +13,7 @@ struct Task: Identifiable, Hashable {
     
     let title: String
     let type: String // I made this string for now but should be an enum TaskType
-    let dueDate: Date
+    let dueDate: Date?
     
     let isCompleted: Bool
     let isBonus: Bool
