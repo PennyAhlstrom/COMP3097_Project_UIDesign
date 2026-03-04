@@ -8,11 +8,10 @@
 import Foundation
 
 struct Task: Identifiable, Hashable {
-    let id = UUID()
-    // let courseID: UUID? // Tasks should be connected to a specific course
+    let id: UUID
+    // let courseID: UUID? // Tasks should be connected to a specific course - how do I do this
     let title: String
     let type: String // I made this string for now but should be an enum TaskType
-    //let dueDate: Date?
     let dueDate: String // Making this string for now
     let isCompleted: Bool
     let isBonus: Bool
@@ -22,6 +21,28 @@ struct Task: Identifiable, Hashable {
     let weight: Double
     let scorePercent: Double
     //let reminders: List<Reminders>?
+
+    init(
+        id: UUID = UUID(),
+        title: String,
+        type: String,
+        dueDate: String,
+        isCompleted: Bool,
+        isBonus: Bool,
+        isPriority: Bool,
+        weight: Double,
+        scorePercent: Double
+    ) {
+        self.id = id
+        self.title = title
+        self.type = type
+        self.dueDate = dueDate
+        self.isCompleted = isCompleted
+        self.isBonus = isBonus
+        self.isPriority = isPriority
+        self.weight = weight
+        self.scorePercent = scorePercent
+    }
 }
 
 extension Task {
