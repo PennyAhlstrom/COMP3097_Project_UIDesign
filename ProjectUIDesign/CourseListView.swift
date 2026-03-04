@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct CourseListView: View {
-    let courses: [Course]
+    //let courses: [Course]
+    @EnvironmentObject var store: AppStore
+
 
     var body: some View {
-        List(courses) { course in
+        //List(courses) { course in
+        List(store.courses) { course in // ADD
             NavigationLink {
-                    CourseDetailView(course: course)
+                //CourseDetailView(course: course)
+                CourseDetailView(courseID: course.id)
             } label: {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(course.code)
@@ -27,11 +31,6 @@ struct CourseListView: View {
                         .font(.caption)
                         .foregroundColor(.secondary)
                     
-                    if let goal = course.gradeGoal {
-                        Text("Grade Goal: \(goal)%")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
                 }
                 .padding(.vertical, 6)
             }
@@ -40,8 +39,15 @@ struct CourseListView: View {
     }
 }
 
+//#Preview {
+//    NavigationStack {
+//        CourseListView(courses: Course.sampleCourses)
+//    }
+//}
+
 #Preview {
     NavigationStack {
-        CourseListView(courses: Course.sampleCourses)
+        CourseListView()
     }
+    .environmentObject(AppStore())
 }
