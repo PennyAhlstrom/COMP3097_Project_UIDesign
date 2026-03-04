@@ -9,31 +9,41 @@ import SwiftUI
 
 struct ProgressDetailView: View {
     @EnvironmentObject var store: AppStore
-    let progressID: UUID
+    let courseID: UUID
 
-    private var progress: Progress? { store.progresses.first { $0.id == progressID } }
+    @State private var selectedProgressID: UUID?
 
     var body: some View {
-        Group {
-            if let progress {
-                List {
-                    Section("Week") {
-                        DetailRow(
-                            label: "Week Of",
-                            value: progress.weekOf.yyyyMMdd // from DateFormat
-                        )
-                    }
+            let snapshots = store.progresses
+                .filter { $0.courseID == courseID }
+                .sorted { $0.weekOf > $1.weekOf }
 
+            let selected = snapshots.first(where: { $0.id == selectedProgressID }) ?? snapshots.first
+
+        Form {
+                    Section("Snapshot") {
+                        Picker("Week Of", selection: $selectedProgressID) {
+                            ForEach(snapshots) { p in
+                                Text(p.weekOf.formatted(.dateTime.year().month().day()))
+                                    .tag(Optional(p.id))
+                            }
+                        }
+                        .pickerStyle(.menu)
+                    }
+            
+            if let progress = selected {
+                List {
                     Section("Percent Points") {
-                        // used DoubleFormadt for number formatting
+                        // used DoubleFormat for number formatting
                         DetailRow(label: "Accumulated",  value: progress.accumulatedPercentPoints.whole)
-                        DetailRow(label: "Used", value: progress.usedPercentPoints.whole)
                         DetailRow(label: "Lost", value: progress.lostPercentPoints.whole)
-                        DetailRow(label: "Max Possible", value: progress.maxPossiblePercent.percent)
+                        DetailRow(label: "Used", value: progress.usedPercentPoints.whole)
+
                     }
 
                     Section("Status") {
                         DetailRow(label: "Current Grade", value: progress.currentGradePercent.percent)
+                        DetailRow(label: "Max Possible", value: progress.maxPossiblePercent.percent)
                         DetailRow(label: "Can Meet Goal", value: progress.canMeetGoal ? "Yes" : "No")
                     }
                 }
@@ -42,9 +52,12 @@ struct ProgressDetailView: View {
             } else {
                 Text("Progress not found.")
                     .foregroundColor(.secondary)
-                    .navigationTitle("Progress")
             }
         }
+        .navigationTitle("Progress")
+                .onAppear {
+                    selectedProgressID = snapshots.first?.id // default to latest
+                }
     }
 }
 
@@ -54,8 +67,8 @@ struct ProgressDetailView: View {
 
 #Preview {
     let store = AppStore()
-    return NavigationStack {
-        ProgressDetailView(progressID: store.progresses.first!.id)
+    NavigationStack {
+        ProgressDetailView(courseID: Course.SampleIDs.course1)
     }
     .environmentObject(store)
 }
