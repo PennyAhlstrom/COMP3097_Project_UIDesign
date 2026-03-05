@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        NavigationStack {
+        //NavigationStack { // removed navigation stack here and added it in ProjectUIDesignApp to get the back buttons to appear on each page
             List {
                 Section {
                     NavigationLink {
@@ -40,12 +40,14 @@ struct HomeView: View {
                         Label("Progress", systemImage: "chart.line.uptrend.xyaxis")
                     }
                 }
-            }
+            //}
             .navigationTitle("ClassMate")
         }
     }
 }
 
 #Preview {
-    HomeView()
+//    HomeView()
+    NavigationStack { HomeView() }
+        .environmentObject(AppStore())
 }
