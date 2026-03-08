@@ -30,7 +30,7 @@ struct CourseEditView: View {
 
     var body: some View {
         NavigationStack {
-            Form {
+            FormScreen(background: .coursesBackground) {
                 Section("Course") {
                     TextField("Code", text: $code)
                     TextField("Title", text: $title)
