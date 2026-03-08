@@ -10,10 +10,10 @@ import SwiftUI
 extension Color {
 
     static let coursesBackground = Color.blue.opacity(0.1)
-
     static let tasksBackground = Color.green.opacity(0.1)
-
     static let progressBackground = Color.orange.opacity(0.1)
-
     static let remindersBackground = Color.purple.opacity(0.1)
+    
+    static let progressCurrentBar = Color.orange
+    static let progressPossibleBar = Color.orange.opacity(0.35)
 }
