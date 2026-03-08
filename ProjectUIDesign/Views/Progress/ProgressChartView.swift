@@ -100,32 +100,6 @@ struct ProgressChartView: View {
                 .fontWeight(.semibold)
                 .frame(maxWidth: .infinity, alignment: .center)
             
-            HStack {
-                Spacer()
-                
-                HStack(spacing: 16) {
-                    HStack(spacing: 6) {
-                        Circle()
-                            .fill(Color.progressCurrentBar)
-                            .frame(width: 10, height: 10)
-                        
-                        Text("Current Grade")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                    
-                    HStack(spacing: 6) {
-                        Circle()
-                            .fill(Color.progressPossibleBar)
-                            .frame(width: 10, height: 10)
-                        
-                        Text("Max Possible")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                }
-            }
-            
             Chart(historyData, id: \.week) { item in
                 if let current = item.current {
                     BarMark(
@@ -164,6 +138,33 @@ struct ProgressChartView: View {
                     AxisGridLine()
                     AxisTick()
                     AxisValueLabel()
+                }
+                
+
+            }
+            HStack {
+                Spacer()
+                
+                HStack(spacing: 16) {
+                    HStack(spacing: 6) {
+                        Circle()
+                            .fill(Color.progressCurrentBar)
+                            .frame(width: 10, height: 10)
+                        
+                        Text("Current Grade")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    HStack(spacing: 6) {
+                        Circle()
+                            .fill(Color.progressPossibleBar)
+                            .frame(width: 10, height: 10)
+                        
+                        Text("Max Possible Grade")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
                 }
             }
         }
