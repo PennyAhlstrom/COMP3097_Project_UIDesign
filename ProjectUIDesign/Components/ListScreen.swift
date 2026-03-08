@@ -9,11 +9,18 @@ import SwiftUI
 
 struct ListScreen<Content: View>: View {
     let title: String
+    let background: Color
     @ViewBuilder let content: () -> Content
 
     var body: some View {
-        List {
-            content()
+        ZStack {
+            background
+                .ignoresSafeArea()
+
+            List {
+                content()
+            }
+            .scrollContentBackground(.hidden)
         }
         .safeAreaInset(edge: .top) {
             Text(title)
@@ -23,10 +30,5 @@ struct ListScreen<Content: View>: View {
                 .padding(.bottom, 4)
         }
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                EmptyView()
-            }
-        }
     }
 }
