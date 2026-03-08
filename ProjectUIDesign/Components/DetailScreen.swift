@@ -16,7 +16,7 @@ struct DetailScreen<Content: View>: View {
             background
                 .ignoresSafeArea()
 
-            List {
+            Group {
                 content()
             }
             .scrollContentBackground(.hidden)
