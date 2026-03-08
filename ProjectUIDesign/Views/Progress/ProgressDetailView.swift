@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Charts
 
 struct ProgressDetailView: View {
     @EnvironmentObject var store: AppStore
@@ -14,11 +15,39 @@ struct ProgressDetailView: View {
     @State private var selectedProgressID: UUID?
 
     var body: some View {
-            let snapshots = store.progresses
-                .filter { $0.courseID == courseID }
-                .sorted { $0.weekOf > $1.weekOf }
+//            let snapshots = store.progresses
+//                .filter { $0.courseID == courseID }
+//                .sorted { $0.weekOf < $1.weekOf } // Chronological order - oldest to newest
+//
+//            let selected = snapshots.first(where: { $0.id == selectedProgressID }) ?? snapshots.first
+        
+        let snapshots = store.progresses
+            .filter { $0.courseID == courseID }
+            .sorted { $0.weekOf < $1.weekOf }
 
-            let selected = snapshots.first(where: { $0.id == selectedProgressID }) ?? snapshots.first
+        let selected = snapshots.first(where: { $0.id == selectedProgressID }) ?? snapshots.last
+
+        let selectedIndex = snapshots.firstIndex { $0.id == selectedProgressID } ?? max(snapshots.count - 1, 0)
+
+        let visibleSnapshots = snapshots.isEmpty ? [] : Array(snapshots.prefix(selectedIndex + 1))
+
+        let historyData: [(week: String, current: Double?, possible: Double?)] = (1...16).map { week in
+            if week <= visibleSnapshots.count {
+                let progress = visibleSnapshots[week - 1]
+                return (
+                    week: "Wk\(week)",
+                    current: progress.currentGradePercent,
+                    possible: progress.maxPossiblePercent
+                )
+            } else {
+                return (
+                    week: "Wk\(week)",
+                    current: nil,
+                    possible: nil
+                )
+            }
+        }
+        
         DetailScreen(background: .progressBackground) {
             Form {
                 Section("Snapshot") {
@@ -29,6 +58,41 @@ struct ProgressDetailView: View {
                         }
                     }
                     .pickerStyle(.menu)
+                }
+                
+                Section("History") {
+                    Chart(historyData, id: \.week) { item in
+                        if let current = item.current {
+                            BarMark(
+                                x: .value("Week", item.week),
+                                y: .value("Percent", current)
+                            )
+                            .position(by: .value("Type", "Current"))
+                            .foregroundStyle(Color.progressCurrentBar)
+                        }
+
+                        if let possible = item.possible {
+                            BarMark(
+                                x: .value("Week", item.week),
+                                y: .value("Percent", possible)
+                            )
+                            .position(by: .value("Type", "Possible"))
+                            .foregroundStyle(Color.progressPossibleBar)
+                        }
+                    }
+                    .frame(height: 220)
+                    .chartYScale(domain: 0...100)
+                    .chartXAxisLabel("Week")
+                    .chartXAxis {
+                        AxisMarks(values: historyData.map { $0.week }) { value in
+                            AxisValueLabel {
+                                if let week = value.as(String.self) {
+                                    Text(week.replacingOccurrences(of: "Wk", with: ""))
+                                }
+                            }
+                        }
+                    }
+                    .chartYAxisLabel("Percent")
                 }
                 
                 if let progress = selected {
