@@ -70,7 +70,7 @@ struct ProgressDetailView: View {
                             .position(by: .value("Type", "Current"))
                             .foregroundStyle(Color.progressCurrentBar)
                         }
-
+                        
                         if let possible = item.possible {
                             BarMark(
                                 x: .value("Week", item.week),
@@ -82,7 +82,16 @@ struct ProgressDetailView: View {
                     }
                     .frame(height: 220)
                     .chartYScale(domain: 0...100)
-                    .chartXAxisLabel("Week")
+                    
+                    .chartXAxisLabel(position: .bottom, alignment: .center) {
+                        Text("Week")
+                    }
+                    
+                    .chartYAxisLabel(position: .leading, alignment: .center) {
+                        Text("Percent")
+                            .rotationEffect(.degrees(-90))
+                    }
+                    
                     .chartXAxis {
                         AxisMarks(values: historyData.map { $0.week }) { value in
                             AxisValueLabel {
@@ -92,7 +101,10 @@ struct ProgressDetailView: View {
                             }
                         }
                     }
-                    .chartYAxisLabel("Percent")
+                    
+                    .chartYAxis {
+                        AxisMarks(position: .leading)
+                    }
                 }
                 
                 if let progress = selected {
