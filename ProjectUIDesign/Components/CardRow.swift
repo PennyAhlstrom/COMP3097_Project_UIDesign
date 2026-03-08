@@ -16,6 +16,7 @@ struct CardRow<Content: View>: View {
             .background(
                 RoundedRectangle(cornerRadius: 12)
                     .fill(Color.white)
+                    .shadow(color: .black.opacity(0.08), radius: 6, y: 3)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
