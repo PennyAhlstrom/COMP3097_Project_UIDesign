@@ -10,62 +10,74 @@ import SwiftUI
 struct HomeView: View {
     var body: some View {
         //NavigationStack { // removed navigation stack here and added it in ProjectUIDesignApp to get the back buttons to appear on each page
-            List {
+        ListScreen(title: "ClassMate", background: .homeBackground){
                 Section {
+                    CardRow(backgroundColor: .coursesBackground) {
                     NavigationLink {
                         //CourseListView(courses: Course.sampleCourses)
                         CourseListView() // Remove argument to use store instead of sample array?
                     } label: {
-                        Label {
-                            Text("Courses")
-                        } icon: {
-                            Image(systemName: "book.closed")
-                                .foregroundStyle(Color.coursesCurrentBar)
+//                        CardRow(backgroundColor: .coursesBackground) {
+                            Label {
+                                Text("Courses")
+                            } icon: {
+                                Image(systemName: "book.closed")
+                                    .foregroundStyle(Color.coursesCurrentBar)
+                            }
                         }
                     }
-                    .listRowBackground(Color.coursesBackground)
-
+//                    .listRowBackground(Color.coursesBackground)
+                    
+                    CardRow(backgroundColor: .tasksBackground) {
                     NavigationLink {
                         //TaskListView(tasks: Task.sampleTasks)
                         TaskListView() // Remove argument to use store instead of sample array?
                     } label: {
-                        Label {
-                            Text("Tasks")
-                        } icon: {
-                            Image(systemName: "checklist")
-                                .foregroundStyle(Color.tasksCurrentBar)
+//                        CardRow(backgroundColor: .tasksBackground) {
+                            Label {
+                                Text("Tasks")
+                            } icon: {
+                                Image(systemName: "checklist")
+                                    .foregroundStyle(Color.tasksCurrentBar)
+                            }
                         }
                     }
-                    .listRowBackground(Color.tasksBackground)
-
+//                    .listRowBackground(Color.tasksBackground)
+                    
+                    CardRow(backgroundColor: .remindersBackground) {
                     NavigationLink {
                         //ReminderListView(reminders: Reminder.sampleReminders)
                         ReminderListView() // Remove argument to use store instead of sample array?
                     } label: {
-                        Label {
-                            Text("Reminders")
-                        } icon: {
-                            Image(systemName: "bell")
-                                .foregroundStyle(Color.remindersCurrentBar)
+//                        CardRow(backgroundColor: .remindersBackground) {
+                            Label {
+                                Text("Reminders")
+                            } icon: {
+                                Image(systemName: "bell")
+                                    .foregroundStyle(Color.remindersCurrentBar)
+                            }
                         }
                     }
-                    .listRowBackground(Color.remindersBackground)
-
+//                    .listRowBackground(Color.remindersBackground)
+                    
+                    CardRow(backgroundColor: .progressBackground) {
                     NavigationLink {
                         //ProgressListView(progresses: Progress.sampleProgresses)
                         ProgressListView() // Remove argument to use store instead of sample array?
                     } label: {
-                        Label {
-                            Text("Progress")
-                        } icon: {
-                            Image(systemName: "chart.line.uptrend.xyaxis")
-                                .foregroundStyle(Color.progressCurrentBar)
+//                        CardRow(backgroundColor: .progressBackground) {
+                            Label {
+                                Text("Progress")
+                            } icon: {
+                                Image(systemName: "chart.line.uptrend.xyaxis")
+                                    .foregroundStyle(Color.progressCurrentBar)
+                            }
                         }
                     }
-                    .listRowBackground(Color.progressBackground)
+//                    .listRowBackground(Color.progressBackground)
                 }
             //}
-            .navigationTitle("ClassMate")
+            .navigationTitle("HOME")
         }
     }
 }
