@@ -29,7 +29,7 @@ struct ProgressDetailView: View {
         
         DetailScreen(background: .progressBackground) {
             Form {
-                Section("Snapshot") {
+                Section("Progress") {
                     Picker("Week of:", selection: $selectedProgressID) {
                         ForEach(snapshots) { p in
                             Text(p.weekOf.formatted(.dateTime.year().month().day()))
@@ -92,21 +92,22 @@ struct ProgressDetailView: View {
                 
                 if let progress = selected {
                     List {
-                        Section("Percent Points") {
-                            // used DoubleFormat for number formatting
-                            DetailRow(label: "Accumulated",  value: progress.accumulatedPercentPoints.whole)
-                            DetailRow(label: "Lost", value: progress.lostPercentPoints.whole)
-                            DetailRow(label: "Used", value: progress.usedPercentPoints.whole)
-                            
-                        }
-                        
                         Section("Status") {
                             DetailRow(label: "Current Grade", value: progress.currentGradePercent.percent)
                             DetailRow(label: "Max Possible", value: progress.maxPossiblePercent.percent)
                             DetailRow(label: "Can Meet Goal", value: progress.canMeetGoal ? "Yes" : "No")
                         }
+                        
+                        Section("Percent Points") {
+                            // used DoubleFormat for number formatting
+                            DetailRow(label: "Accumulated",  value: progress.accumulatedPercentPoints.whole)
+                            DetailRow(label: "Lost", value: progress.lostPercentPoints.whole)
+                            DetailRow(label: "Used", value: progress.usedPercentPoints.whole)
+                        }
+                        
                     }
                     .navigationTitle("Progress")
+                    .navigationBarTitleDisplayMode(.inline)
                     
                 } else {
                     Text("Progress not found.")
