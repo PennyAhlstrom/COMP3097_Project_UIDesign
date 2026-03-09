@@ -8,8 +8,17 @@
 import SwiftUI
 
 struct CardRow<Content: View>: View {
+    let backgroundColor: Color
     @ViewBuilder let content: () -> Content
-
+    
+    init(
+            backgroundColor: Color = Color(.systemBackground), // Default
+            @ViewBuilder content: @escaping () -> Content
+        ) {
+            self.backgroundColor = backgroundColor
+            self.content = content
+        }
+    
     var body: some View {
         content()
             .frame(maxWidth: .infinity, alignment: .leading) // Make sure the card takes the full width even if it does not have content for it
@@ -17,7 +26,8 @@ struct CardRow<Content: View>: View {
             .background(
                 RoundedRectangle(cornerRadius: 12)
                     //.fill(Color.white)
-                    .fill(Color(.systemBackground)) // used to adapt to dark/light mode
+//                    .fill(Color(.systemBackground)) // used to adapt to dark/light mode
+                    .fill(backgroundColor)
                     .shadow(color: .black.opacity(0.08), radius: 6, y: 3)
             )
             .overlay(
