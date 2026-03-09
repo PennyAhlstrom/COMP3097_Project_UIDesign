@@ -11,6 +11,16 @@ struct ListScreen<Content: View>: View {
     let title: String
     let background: Color
     @ViewBuilder let content: () -> Content
+    
+    init(
+            title: String = "ClassMate", // Default title
+            background: Color,
+            @ViewBuilder content: @escaping () -> Content
+        ) {
+            self.title = title
+            self.background = background
+            self.content = content
+        }
 
     var body: some View {
         ZStack {
