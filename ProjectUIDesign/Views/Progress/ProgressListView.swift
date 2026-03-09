@@ -11,7 +11,7 @@ struct ProgressListView: View {
     @EnvironmentObject var store: AppStore
 
     var body: some View {
-        ListScreen(title: "Progress", background: .progressBackground) {
+        ListScreen(background: .progressBackground) {
                     Section {
                         ForEach(store.courses) { course in
                             CardRow {
@@ -28,6 +28,7 @@ struct ProgressListView: View {
                                 }
                             }
                         }
+                                .navigationTitle("PROGRESS")
                     }
                 }
             }

@@ -13,7 +13,7 @@ struct ReminderListView: View {
     
 
     var body: some View {
-        ListScreen(title: "Reminders", background: .remindersBackground) {
+        ListScreen(background: .remindersBackground) {
             Section {
                 ForEach(store.reminders, id: \.id) { reminder in
                     CardRow {
@@ -47,7 +47,7 @@ struct ReminderListView: View {
 //                .padding(.vertical, 6)
 //            }
 //        }
-//        .navigationTitle("Reminders")
+        .navigationTitle("REMINDERS")
 //        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {

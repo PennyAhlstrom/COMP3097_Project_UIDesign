@@ -14,7 +14,7 @@ struct CourseListView: View {
     
     
     var body: some View {
-        ListScreen(title: "Courses", background: .coursesBackground){
+        ListScreen(background: .coursesBackground){
                     Section {
                         ForEach(store.courses) { course in
                             CardRow {
@@ -61,7 +61,7 @@ struct CourseListView: View {
 //                .padding(.vertical, 6)
 //            }
 //        }
-//        .navigationTitle("Courses")
+        .navigationTitle("COURSES")
 //        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {

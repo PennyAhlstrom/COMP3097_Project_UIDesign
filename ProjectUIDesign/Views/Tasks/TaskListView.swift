@@ -13,7 +13,7 @@ struct TaskListView: View {
     @State private var showingAddTask = false
 
     var body: some View {
-        ListScreen(title: "Tasks", background: .tasksBackground) {
+        ListScreen(background: .tasksBackground) {
                     Section {
                         ForEach(store.tasks) { task in
                             CardRow {
@@ -55,7 +55,7 @@ struct TaskListView: View {
 //                .padding(.vertical, 6)
 //            }
 //        }
-//        .navigationTitle("Tasks")
+        .navigationTitle("TASKS")
 //        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
