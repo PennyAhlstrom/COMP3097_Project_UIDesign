@@ -121,9 +121,6 @@ struct ProgressChartView: View {
             }
             .frame(height: 220)
             .chartYScale(domain: 0...100)
-            .chartXAxisLabel(position: .bottom, alignment: .center) {
-                Text("Week")
-            }
             .chartXAxis {
                 AxisMarks(values: historyData.map { $0.week }) { value in
                     AxisValueLabel {
